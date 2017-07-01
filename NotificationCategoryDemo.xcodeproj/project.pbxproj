@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		840732AE1F04CA8B00230191 /* SViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840732AD1F04CA8B00230191 /* SViewController.swift */; };
+		84E5EC0A1F061CEF00B9CABA /* ASNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E5EC091F061CEF00B9CABA /* ASNotifications.swift */; };
+		84E5EC0C1F06859C00B9CABA /* videovc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E5EC0B1F06859C00B9CABA /* videovc.swift */; };
+		84E5EC101F068A0E00B9CABA /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E5EC0E1F068A0E00B9CABA /* AVFoundation.framework */; };
+		84E5EC111F068A0E00B9CABA /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E5EC0F1F068A0E00B9CABA /* AVKit.framework */; };
 		E1E035791DF1A521008BCFA0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E035781DF1A521008BCFA0 /* AppDelegate.swift */; };
 		E1E0357B1DF1A521008BCFA0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E0357A1DF1A521008BCFA0 /* ViewController.swift */; };
 		E1E0357E1DF1A521008BCFA0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1E0357C1DF1A521008BCFA0 /* Main.storyboard */; };
@@ -17,6 +21,10 @@
 
 /* Begin PBXFileReference section */
 		840732AD1F04CA8B00230191 /* SViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SViewController.swift; sourceTree = "<group>"; };
+		84E5EC091F061CEF00B9CABA /* ASNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASNotifications.swift; sourceTree = "<group>"; };
+		84E5EC0B1F06859C00B9CABA /* videovc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = videovc.swift; sourceTree = "<group>"; };
+		84E5EC0E1F068A0E00B9CABA /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		84E5EC0F1F068A0E00B9CABA /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		E1E035751DF1A521008BCFA0 /* NotificationCategoryDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NotificationCategoryDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1E035781DF1A521008BCFA0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E1E0357A1DF1A521008BCFA0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -31,17 +39,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84E5EC101F068A0E00B9CABA /* AVFoundation.framework in Frameworks */,
+				84E5EC111F068A0E00B9CABA /* AVKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		84E5EC0D1F068A0E00B9CABA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				84E5EC0E1F068A0E00B9CABA /* AVFoundation.framework */,
+				84E5EC0F1F068A0E00B9CABA /* AVKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E1E0356C1DF1A521008BCFA0 = {
 			isa = PBXGroup;
 			children = (
 				E1E035771DF1A521008BCFA0 /* NotificationCategoryDemo */,
 				E1E035761DF1A521008BCFA0 /* Products */,
+				84E5EC0D1F068A0E00B9CABA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,6 +83,8 @@
 				E1E0357F1DF1A521008BCFA0 /* Assets.xcassets */,
 				E1E035811DF1A521008BCFA0 /* LaunchScreen.storyboard */,
 				E1E035841DF1A521008BCFA0 /* Info.plist */,
+				84E5EC091F061CEF00B9CABA /* ASNotifications.swift */,
+				84E5EC0B1F06859C00B9CABA /* videovc.swift */,
 			);
 			path = NotificationCategoryDemo;
 			sourceTree = "<group>";
@@ -139,8 +161,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84E5EC0C1F06859C00B9CABA /* videovc.swift in Sources */,
 				E1E0357B1DF1A521008BCFA0 /* ViewController.swift in Sources */,
 				840732AE1F04CA8B00230191 /* SViewController.swift in Sources */,
+				84E5EC0A1F061CEF00B9CABA /* ASNotifications.swift in Sources */,
 				E1E035791DF1A521008BCFA0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -266,6 +290,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = NotificationCategoryDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.akash.notificationdemobyakash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -279,6 +304,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = NotificationCategoryDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.akash.notificationdemobyakash;
 				PRODUCT_NAME = "$(TARGET_NAME)";

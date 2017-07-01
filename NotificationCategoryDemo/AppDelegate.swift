@@ -3,50 +3,59 @@
 //  NotificationCategoryDemo
 // Created by Akash Singh Sisodia on 6/29/17
 import UIKit
-
+import UserNotifications
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
+class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDelegate {
+   
+    var isGrantedAccess = false
     var window: UIWindow?
     var commingFromNotification:Bool = false
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-         return true
+     
+    // MARK:  --> Register For LocalNotifications
+        UNUserNotificationCenter.current().delegate = self
+        UNUserNotificationCenter.current().requestAuthorization(
+            options: [.alert,.sound,.badge],
+            completionHandler: { (granted,error) in
+                self.isGrantedAccess = granted
+                if granted{
+                  ASNotification.init().setCategories()
+                } else {
+                    let alert = UIAlertController(title: "Notification Access", message: "In order to use this application, turn on notification permissions.", preferredStyle: .alert)
+                    let alertAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+                    alert.addAction(alertAction)
+                    self.window?.rootViewController?.present(alert , animated: true, completion: nil)
+                }
+        })
+        
+        return true
     }
+    
+    
 
     func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
-    }
+           }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
     }
-
     func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         
-        if(commingFromNotification){
-        let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
-        let redViewController = mainStoryBoard.instantiateViewController(withIdentifier: "viewview") as! SViewController
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.window?.rootViewController = redViewController
-        
-        }
-
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+      
     }
     
-            func application(application: UIApplication,
+    
+    
+    // MARK:  --> Handle LocalNotification
+     func application(application: UIApplication,
 
                              handleActionWithIdentifier identifier:String?,
                          forLocalNotification notification:UILocalNotification,
@@ -80,7 +89,63 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
              
             }
         }
+    
+    // MARK: - Delegates
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert,.sound])
+        
+    }
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let identifier = response.actionIdentifier
+        let request = response.notification.request
+        
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.commingFromNotification = true
+        
+        
+        if identifier == "snooze"{
+            let newContent = request.content.mutableCopy() as! UNMutableNotificationContent
+            newContent.body = "Snooze 5 Seconds"
+            newContent.subtitle = "Snooze 5 Seconds"
+         //   let newTrigger = UNTimeIntervalNotificationTrigger(timeInterval: snooze, repeats: false)
+            
+            
+            //ASNotification.init().addNotification(content: newContent, trigger: , indentifier: request.identifier)
+            
+        }else if identifier == "comment"{
+            let textResponse = response as! UNTextInputNotificationResponse
+            //commentsLabel.text = textResponse.userText
+            let newContent = request.content.mutableCopy() as! UNMutableNotificationContent
+            newContent.body = textResponse.userText
+            
+            print("comment ---->> \(textResponse.userText)")
+            
+            ASNotification.init().addNotification(content: newContent, trigger: request.trigger, indentifier: request.identifier)
+        }else{
+        
+        
+        
+        
+            if(commingFromNotification){
+                let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
+                let redViewController = mainStoryBoard.instantiateViewController(withIdentifier: "viewview") as! SViewController
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.window?.rootViewController = redViewController
+                
+            }
 
+        
+        
+        
+        }
+        
+        completionHandler()
+    }
+    func didReceive(_ request: UNNotificationRequest,
+                    withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void)
+    {}
 
 }
+
 
